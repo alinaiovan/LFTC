@@ -2,15 +2,22 @@ reservedWords = []
 separators = []
 operators = []
 
+allReservedSepOp = ['const', 'id']
+
 
 def readFile():
     with open('token.in', 'r') as f:
         for i in range(5):
-            operators.append(f.readline().strip())
+            char = f.readline().strip()
+            operators.append(char)
+            allReservedSepOp.append(char)
         for i in range(13):
-            separator = f.readline().strip()
-            if separator == "space":
-                separator = " "
-            separators.append(separator)
+            char = f.readline().strip()
+            if char == "space":
+                char = " "
+            separators.append(char)
+            allReservedSepOp.append(char)
         for i in range(17):
-            reservedWords.append(f.readline().strip())
+            char = f.readline().strip()
+            reservedWords.append(char)
+            allReservedSepOp.append(char)

@@ -1,0 +1,11 @@
+n3 <= 100
+max <= 50
+
+if(n3 bigger max){
+    max <= n3;
+}
+
+message <= ~The max number is : $max~
+
+send message;
+
