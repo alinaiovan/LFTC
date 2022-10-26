@@ -41,21 +41,21 @@ class Scanner:
                     tokens.append(token)
                 token, index = self.getOperatorToken(line, index)
                 tokens.append(token)
-                token = ''  # reset token
+                token = ''
 
             elif line[index] == '~':
                 if token:
                     tokens.append(token)
                 token, index = self.getStringToken(line, index)
                 tokens.append(token)
-                token = ''  # reset token
+                token = ''
 
             elif line[index] in separators:
                 if token:
                     tokens.append(token)
                 token, index = line[index], index + 1
                 tokens.append(token)
-                token = ''  # reset token
+                token = ''
 
             else:
                 token += line[index]
