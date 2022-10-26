@@ -8,6 +8,6 @@ class PIF:
     def add(self,token ,posToken, pos):
         self.__content.add((token, posToken , pos))
 
-    def list(self):
-        self.__content.list()
+    def __str__(self):
+        return str(self.__content)
 

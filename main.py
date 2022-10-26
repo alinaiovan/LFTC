@@ -37,12 +37,18 @@ class Main:
                         exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(
                             lineCounter) + "\n"
 
+        with open('stIdentifiers.out', 'w') as writer:
+            writer.write(str(self.stIdentifier))
+
+        with open('stConstants.out', 'w') as writer:
+            writer.write(str(self.stConstants))
+
+        with open('pif.out', 'w') as writer:
+            writer.write(str(self.pif))
+
+
         if exceptionMessage == '':
             print("Lexically correct\n")
-            print("Constants: \n", self.stConstants)
-            print("Identifiers: \n", self.stIdentifier)
-            print("PIF: \n")
-            self.pif.list()
         else:
             print(exceptionMessage)
 
