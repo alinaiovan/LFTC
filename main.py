@@ -14,7 +14,7 @@ class Main:
 
     def run(self):
         readFile()
-        fileName = "p-error.txt"
+        fileName = "p1.txt"
         exceptionMessage = ""
 
         with open(fileName, 'r') as file:
