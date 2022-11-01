@@ -5,7 +5,7 @@ if(n3 bigger max){
     max <= n3;
 }
 
-message <= ~The max number is : $max~
+message <= ~This is a message~
 
 send message;
 
