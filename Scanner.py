@@ -69,3 +69,6 @@ class Scanner:
 
     def isConstant(self, token):
         return re.match(r'^(0|[+-]?[1-9]\d*)$|^~.*~$', token) is not None
+
+    def isString(selfself, token):
+        return re.match(r'^~.*~$', token) is not None

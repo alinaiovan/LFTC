@@ -15,7 +15,7 @@ class Main:
 
     def run(self):
         readFile()
-        fileName = "p1.txt"
+        fileName = "p-error.txt"
         exceptionMessage = ""
         faConstant = FiniteAutomata.readFromFile('fa-constant.in')
         faIdentifier = FiniteAutomata.readFromFile('fa-identifier.in')
@@ -40,6 +40,9 @@ class Main:
                         id = self.stIdentifier.add(tokens[i])
                         self.pif.add(tokens[i], allReservedSepOp.index("id"), id)
                     elif faConstant.isAccepted(tokens[i]):
+                        const = self.stConstants.add(tokens[i])
+                        self.pif.add(tokens[i], allReservedSepOp.index("const"), const)
+                    elif self.scanner.isString(tokens[i]):
                         const = self.stConstants.add(tokens[i])
                         self.pif.add(tokens[i], allReservedSepOp.index("const"), const)
                     else:
