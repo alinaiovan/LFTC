@@ -1,3 +1,4 @@
+from FiniteAutomata import FiniteAutomata
 from HashTable import HashTable
 from PIF import PIF
 from ReadTokens import readFile, reservedWords, allReservedSepOp
@@ -14,8 +15,10 @@ class Main:
 
     def run(self):
         readFile()
-        fileName = "p-error.txt"
+        fileName = "p1.txt"
         exceptionMessage = ""
+        faConstant = FiniteAutomata.readFromFile('fa-constant.in')
+        faIdentifier = FiniteAutomata.readFromFile('fa-identifier.in')
 
         with open(fileName, 'r') as file:
             lineCounter = 0
@@ -26,16 +29,21 @@ class Main:
                     if tokens[i] in reservedWords + separators + operators:
                         if tokens[i] == ' ':
                             continue
-                        self.pif.add(tokens[i], allReservedSepOp.index(tokens[i]),  -1)
-                    elif self.scanner.isIdentifier(tokens[i]):
+                    #     self.pif.add(tokens[i], allReservedSepOp.index(tokens[i]),  -1)
+                    # elif self.scanner.isIdentifier(tokens[i]):
+                    #     id = self.stIdentifier.add(tokens[i])
+                    #     self.pif.add(tokens[i], allReservedSepOp.index("id"), id)
+                    # elif self.scanner.isConstant(tokens[i]):
+                    #     const = self.stConstants.add(tokens[i])
+                    #     self.pif.add(tokens[i], allReservedSepOp.index("const"), const)
+                    elif faIdentifier.isAccepted(tokens[i]):
                         id = self.stIdentifier.add(tokens[i])
                         self.pif.add(tokens[i], allReservedSepOp.index("id"), id)
-                    elif self.scanner.isConstant(tokens[i]):
+                    elif faConstant.isAccepted(tokens[i]):
                         const = self.stConstants.add(tokens[i])
                         self.pif.add(tokens[i], allReservedSepOp.index("const"), const)
                     else:
-                        exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(
-                            lineCounter) + "\n"
+                        exceptionMessage += 'Lexical error at token ' + tokens[i] + ', at line ' + str(lineCounter) + "\n"
 
         with open('stIdentifiers.out', 'w') as writer:
             writer.write(str(self.stIdentifier))
