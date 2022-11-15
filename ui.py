@@ -28,7 +28,10 @@ class Console:
 
     def checkAccepted(self):
         seq = input()
-        print(self.fa.isAccepted(seq))
+        if self.fa.isAccepted(seq):
+            print("Valid")
+        else:
+            print("Invalid")
 
     def displayMenu(self):
         print("1.Display states")
