@@ -1,0 +1,9 @@
+# max, n1, n2;
+n1 <= 3;
+n2 <= 5;
+if(n1 smaller n2){
+    max <= n2;
+}
+else{
+    max <= n1;
+}
