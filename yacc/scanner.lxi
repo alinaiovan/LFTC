@@ -1,0 +1,70 @@
+%{ 	 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include "lang.tab.h"
+    int lines = 0;
+%} 
+
+%option noyywrap
+%option caseless
+
+DIGIT 		[0-9]
+WORD		~[A-Za-z0-9 ]*~
+NUMBER		[+-]?[1-9][0-9]*|0$
+CONST		{WORD}|{NUMBER}
+ID 		[a-zA-Z][a-zA-Z0-9_]{0,7}
+
+%%
+
+and     {printf("Reserved word: %s\n", yytext); return AND; }
+bigger	{printf( "Reserved word: %s\n", yytext); return BIGGER; }
+else	{printf( "Reserved word: %s\n", yytext); return ELSE; }
+for	{printf( "Reserved word: %s\n", yytext); return FOR; }
+smaller	{printf( "Reserved word: %s\n", yytext); return SMALLER; }
+if	{printf( "Reserved word: %s\n", yytext); return IF; }
+send	{printf( "Reserved word: %s\n", yytext); return RETURN; }
+or	{printf( "Reserved word: %s\n", yytext); return OR;}
+\#	{printf( "Reserved word: %s\n", yytext); return INT; }
+\$	{printf( "Reserved word: %s\n", yytext); return STRING; }
+\@	{printf( "Reserved word: %s\n", yytext); return ARRAY; }
+while	{printf( "Reserved word: %s\n", yytext); return WHILE; }
+read	{printf( "Reserved word: %s\n", yytext); return READ; }
+write	{printf( "Reserved word: %s\n", yytext); return WRITE; }
+equal	{printf( "Reserved word: %s\n", yytext); return EQQ; }
+
+{ID}	{printf( "Identifier: %s\n", yytext ); return IDENTIFIER; }
+
+{CONST}	{printf( "Constant: %s\n", yytext ); return CONSTANT; }
+
+";"	{printf( "Separator: %s\n", yytext ); return SEMICOLON; }
+","	{printf( "Separator: %s\n", yytext ); return COMMA; }
+"%"	{printf( "Separator: %s\n", yytext ); return PERCENT; }
+"~"	{printf( "Separator: %s\n", yytext ); return TILDE; }
+"{"	{printf( "Separator: %s\n", yytext ); return CURLYOPEN; }
+"}"	{printf( "Separator: %s\n", yytext ); return CURLYCLOSE; }
+"("	{printf( "Separator: %s\n", yytext ); return BRACKETOPEN; }
+")"	{printf( "Separator: %s\n", yytext ); return  BRACKETCLOSE; }
+"["	{printf( "Separator: %s\n", yytext ); return RIGHTOPEN; }
+"]"	{printf( "Separator: %s\n", yytext ); return RIGHTCLOSE; }
+"<"	{printf( "Separator: %s\n", yytext ); return ARROWOPEN; }
+">"	{printf( "Separator: %s\n", yytext ); return ARROWCLOSE; }
+"+"	{printf( "Operator: %s\n", yytext ); return PLUS; }
+"*"	{printf( "Operator: %s\n", yytext ); return TIMES; }
+"//"	{printf( "Operator: %s\n", yytext ); return DIV; }
+"/."	{printf( "Operator: %s\n", yytext ); return FLOATDIV; }
+"<="	{printf( "Operator: %s\n", yytext ); return EQ; }
+
+
+
+
+[ \t]+  	{}
+[\n]+ {lines++;}
+
+[+-]?0[0-9]* {printf("Illegal constant at line %d\n", lines);}
+
+[a-zA-Z][a-zA-Z0-9]{8,}	{printf("Illegal size of the identifier at line %d\n", lines);}
+. {printf("Error at token %s at line %d\n", yytext, lines); exit(1);}
+
+%%

@@ -1,0 +1,9 @@
+n3 <= 100;
+max <= 50;
+$ message;
+
+if(n3 bigger max){
+    max <= n3
+}else{
+	message <= ~No max number~
+}

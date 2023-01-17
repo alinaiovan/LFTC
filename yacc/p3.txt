@@ -1,0 +1,16 @@
+# cat;
+# rest;
+$ string ;
+
+n <= 3;
+i <= 2;
+
+cat <= n//i;
+rest <= n/.i;
+
+read (string);
+write (string)
+
+
+
+

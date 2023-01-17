@@ -1,0 +1,17 @@
+
+	# max;
+	$ message;
+	[#] array;
+	if ( n1 bigger n2 ) {
+		max <=- n1
+	}else{
+		max <= n2
+
+	}
+
+	if(n3 bigger max){
+		max = n3;
+	}
+
+	message <= ~The maximum is: $max~;
+	send message;
